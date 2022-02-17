@@ -1,10 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class MovieCollection
 {
@@ -248,7 +245,7 @@ public class MovieCollection
       String movieTitle = movies.get(i).getCast();
       movieTitle = movieTitle.toLowerCase();
 
-      if (movieTitle.indexOf(selectedCast) != -1)
+      if (movieTitle.indexOf(selectedCast.toLowerCase()) != -1)
       {
         //add the Movie objest to the results list
         rez.add(movies.get(i));
@@ -257,6 +254,15 @@ public class MovieCollection
 
     // sort the results by title
     sortResults(rez);
+    for (int i = 0; i < rez.size(); i++)
+    {
+      String title = rez.get(i).getTitle();
+
+      // this will print index 0 as choice 1 in the results list; better for user!
+      int choiceNum = i + 1;
+
+      System.out.println("" + choiceNum + ". " + title);
+    }
 
     System.out.println("Which movie would you like to learn more about?");
     System.out.print("Enter number: ");
