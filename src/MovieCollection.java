@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -214,7 +215,7 @@ public class MovieCollection
     // CONVERT SET TO ARRAYLIST
     ArrayList<String> results = new ArrayList<String>();
     results.addAll(casts);
-    // sort the results by title
+    // sort the names
     insertionSortWordList(results);
 
     // now, display them all to the user
@@ -332,8 +333,117 @@ public class MovieCollection
   
   private void listGenres()
   {
-  
+    try
+    {
+      FileReader fileReader = new FileReader("src/genres");
+      BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+      String line;
+
+
+      System.out.println("List of genres");
+
+      int i = 0;
+      while ((line = bufferedReader.readLine()) != null)
+      {
+        System.out.println("" + (i+1)+ ". " + line);
+        i++;
+      }
+
+      System.out.println("What genre will you pick?");
+      System.out.print("Enter number: ");
+
+      int choice = scanner.nextInt();
+      scanner.nextLine();
+
+      bufferedReader.close();
+      fileReader = new FileReader("src/genres");
+      bufferedReader = new BufferedReader(fileReader);
+
+      for(int k = 0;k<choice-1;k++)
+      {
+        bufferedReader.readLine();
+      }
+      String genre = bufferedReader.readLine();
+      System.out.println(genre);//TEST STATMENTPRINT STUFF
+
+      ArrayList<Movie> results = new ArrayList<>();
+
+      for(Movie m: movies)
+      {
+        if(m.getGenres().contains(genre)) results.add(m);
+      }
+
+
+      sortResults(results);
+
+      // now, display them all to the user
+      for (int j = 0; j < results.size(); j++)
+      {
+        String title = results.get(j).getTitle();
+
+        // this will print index 0 as choice 1 in the results list; better for user!
+        int choiceNum = j + 1;
+
+        System.out.println("" + choiceNum + ". " + title);
+      }
+
+      System.out.println("Which movie would you like to learn more about?");
+      System.out.print("Enter number: ");
+
+      choice = scanner.nextInt();
+      scanner.nextLine();
+
+      Movie selectedMovie = results.get(choice - 1);
+
+      displayMovieInfo(selectedMovie);
+
+      System.out.println("\n ** Press Enter to Return to Main Menu **");
+      scanner.nextLine();
+
+
+
+      bufferedReader.close();
+    }
+    catch(IOException exception)
+    {
+      // Print out the exception that occurred
+      System.out.println("Stuff happened: " + exception.getMessage());
+    }
   }
+
+  public ArrayList<String> getAllGenre()
+  {
+      Set<String> genres = new HashSet<String>();
+      for(Movie m:movies)
+      {
+        String[] gen = m.getGenres().split("\\|");
+        for(String s:gen)
+        {
+          genres.add(s);
+        }
+      }
+      ArrayList<String> results = new ArrayList<>();
+      results.addAll(genres);
+      insertionSortWordList(results);
+      return results;
+  }
+
+  public static void writeArrListToFile(ArrayList<String> arr, String fileName) {
+    try
+    {
+      FileWriter writer = new FileWriter(fileName);
+      for(String str:arr) {
+      writer.write(str + System.lineSeparator());
+      }
+      writer.close();
+    }
+    catch (IOException e) {
+      System.out.println("Stuff happened: " + e.getMessage());
+    }
+  }
+
+
   
   private void listHighestRated()
   {
