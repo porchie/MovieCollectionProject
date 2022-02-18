@@ -447,12 +447,77 @@ public class MovieCollection
   
   private void listHighestRated()
   {
-  
+    // brute force with 50 times bruh
+    ArrayList<Movie> results = new ArrayList<>();
+    ArrayList<Movie> moviesCopy = makeCopy();
+    insertionSort(moviesCopy);
+    for(int i = moviesCopy.size() - 1; i>= moviesCopy.size()-51;i--)
+    {
+      results.add(moviesCopy.get(i));
+    }
+
+
+    // now, display them all to the user
+    for (int j = 0; j < results.size(); j++)
+    {
+      String title = results.get(j).getTitle();
+
+      // this will print index 0 as choice 1 in the results list; better for user!
+      int choiceNum = j + 1;
+
+      System.out.println("" + choiceNum + ". " + title);
+    }
+
+    System.out.println("Which movie would you like to learn more about?");
+    System.out.print("Enter number: ");
+
+    int choice = scanner.nextInt();
+    scanner.nextLine();
+
+    Movie selectedMovie = results.get(choice - 1);
+
+    displayMovieInfo(selectedMovie);
+
+    System.out.println("\n ** Press Enter to Return to Main Menu **");
+    scanner.nextLine();
+
+
+  }
+
+
+  public static void insertionSort(ArrayList<Movie> m)
+  {
+
+    for (int j = 1; j < m.size(); j++)
+    {
+      double temp = m.get(j).getUserRating();
+      int possibleIndex = j;
+      while (possibleIndex > 0 && temp < m.get(possibleIndex - 1).getUserRating())
+      {
+
+       // elements[possibleIndex] = elements[possibleIndex - 1];
+        m.set(possibleIndex,m.get(possibleIndex-1));
+        possibleIndex--;
+      }
+     // elements[possibleIndex] = temp;
+      m.set(possibleIndex,m.get(j));
+    }
+
+  }
+
+  private ArrayList<Movie> makeCopy()
+  {
+    ArrayList<Movie> arr = new ArrayList<>();
+    for(Movie m:movies)
+    {
+      arr.add(m);
+    }
+    return arr;
   }
   
   private void listHighestRevenue()
   {
-  
+
   }
   
   private void importMovieList(String fileName)
