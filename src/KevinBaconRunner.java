@@ -52,6 +52,7 @@ public class KevinBaconRunner {
 
             for (int i = 0; i < matches.size(); i++)
             {
+
                 String name = matches.get(i);
 
                 // this will print index 0 as choice 1 in the results list; better for user!
@@ -59,22 +60,30 @@ public class KevinBaconRunner {
 
                 System.out.println("" + choiceNum + ". " + name);
             }
-            System.out.println("Which actor do you want to pick");
-            System.out.println("Enter a number");
-
-            int num = scanner.nextInt();
-            scanner.nextLine();
-
-            choice = matches.get(num-1);
-
-            while ((line = buffread.readLine()) != null) {
-                lineNum++;
-                alreadyRead.add(line);
-                if (line.contains(choice)) break;
+            if(matches.size()==0)
+            {
+                System.out.println("No results found");
             }
-            if (line == null) System.out.println("NOT WITHIN 6 DEGREES OR SPELT WRONG");
-            else System.out.println("Bacon Number of: " + lineNum / 2);
-            System.out.println(getPath(alreadyRead, choice, lineNum));
+            else {
+                System.out.println("Which actor do you want to pick");
+                System.out.println("Enter a number");
+
+                int num = scanner.nextInt();
+                scanner.nextLine();
+
+                choice = matches.get(num - 1);
+
+                while ((line = buffread.readLine()) != null) {
+                    lineNum++;
+                    alreadyRead.add(line);
+                    if (line.contains(choice)) break;
+                }
+                if (line == null) System.out.println("NOT WITHIN 6 DEGREES OR SPELT WRONG");
+                else {
+                    System.out.println("Bacon Number of: " + lineNum / 2);
+                    System.out.println(getPath(alreadyRead, choice, lineNum));
+                }
+            }
             reader.close();
             buffread.close();
         }
@@ -107,6 +116,7 @@ public class KevinBaconRunner {
             int currentLine = lineNum-j;
             String[] castArr = arr.get(i).split("/");
             String[] actor = castArr[reference].split(";");
+
             print.add(actor[2]);
             //System.out.println(castArr[reference]);
             reference = Integer.parseInt(actor[1].substring(1));
