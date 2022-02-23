@@ -570,6 +570,8 @@ public class MovieCollection
     scanner.nextLine();
 
   }
+
+
   
   private void importMovieList(String fileName)
   {
