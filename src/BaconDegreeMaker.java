@@ -7,8 +7,8 @@ import java.io.FileWriter;
 
 public class BaconDegreeMaker {
     private ArrayList<SimpleMovie> movies;
-    private static Set<String> addedMovies = new HashSet<>();
-    private static Set<String> addedActors = new HashSet<>();
+    private Set<String> addedMovies = new HashSet<>();
+    private Set<String> addedActors = new HashSet<>();
     private FileWriter writer = new FileWriter("src/KevinBaconDegreeMap");
 
 
@@ -21,25 +21,15 @@ public class BaconDegreeMaker {
         movies.forEach((n) -> System.out.println(n.getTitle() + " " + n.getCast()));
     }
 
-    public ArrayList<SimpleMovie> kevinBaconMovies()
-    {
-        ArrayList<SimpleMovie> kevBacMov = new ArrayList<>();
-        for(SimpleMovie m: movies)
-        {
-            if(m.getCast().contains("Kevin Bacon")) {
-                kevBacMov.add(m);
-            }
-        }
-        return kevBacMov;
-    }
 
-    public void writeMap()
+
+    public void writeMap() //dont call this lol it will kill your computer
     {
         try
         {
             ArrayList<String> literallyJustKevinBacon = new ArrayList<>();
             literallyJustKevinBacon.add("Kevin Bacon");
-            FileWriter writer = new FileWriter("src/KevinBaconDegreeMap");
+            writer = new FileWriter("src/KevinBaconDegreeMap");
 
             writer.write(literallyJustKevinBacon.get(0)+";A0;");
             writer.write(System.lineSeparator());
@@ -57,6 +47,7 @@ public class BaconDegreeMaker {
 
 
             writer.close();
+
         }
         catch (IOException e)
         {
