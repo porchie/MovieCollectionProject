@@ -36,7 +36,21 @@ public class BaconDegreeMaker {
 
             ArrayList<SimpleMovie> arr1 = actorToMovie(literallyJustKevinBacon,"A","B");
             ArrayList<String> prevLayerAct =  movieToActor(arr1,"B","A");
+            /**
+             Every entry into the map has 2 points, one to the front and one to the back like this\
+             ;A1;The Thing;B1;
+             front refers to the parent on the map, aka where i got this entry from. A1 here refers to an actor in the thing
+             back is the reference that the entry's children will reference.
+             so basically
+             Jerry Seinfield;A1;
+             ;A1;The Thing;B1;
+             ;B1;Peter Falk
 
+             This way i can trace up the tree back to kevin bacon
+
+             EVEN LINE NUMS HAVE A - B
+             ODD LINE NUMS HAVE B - A
+             **/
             for(int i = 0;i<5;i++) //mfw cook egg on my scorching laptop cuz jvm is crying
             {
                 String top = (i%2==0) ?"A":"B";
@@ -64,7 +78,7 @@ public class BaconDegreeMaker {
             int j = 0;
             for (String s : actors) {
 
-                for (SimpleMovie m : movies) {
+                for (SimpleMovie m : movies) { //150000 everytime very bad
                    if(m.getCast().contains(s)) {
                         if(addedMovies.add(m.getTitle()))
                         {
@@ -77,7 +91,7 @@ public class BaconDegreeMaker {
                 i++;
             }
             writer.write(System.lineSeparator());
-            removeFromMovies(added);
+            removeFromMovies(added); //try to remove from the 150000 possibly even worse
             return added;
         }
         catch (IOException e)
