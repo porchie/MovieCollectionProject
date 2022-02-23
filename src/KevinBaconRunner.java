@@ -5,6 +5,6 @@ public class KevinBaconRunner {
 
        BaconDegreeMaker b =new BaconDegreeMaker("src/movie_data.txt");
        //b.printOutList();
-        b.kevinBaconMovies();
+        b.writeMap();
     }
 }

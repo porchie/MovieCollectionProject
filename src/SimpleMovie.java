@@ -6,6 +6,10 @@ public class SimpleMovie {
         this.title=title;
         this.cast=cast;
     }
+    public boolean isCopy(SimpleMovie m)
+    {
+        return (this.title.equals(m.getTitle()) && this.cast.equals(m.getCast()));
+    }
 
     public String getCast() {
         return cast;
