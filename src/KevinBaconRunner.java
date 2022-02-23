@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class KevinBaconRunner {
@@ -21,7 +22,17 @@ public class KevinBaconRunner {
         }
         System.out.println(count);
          **/ //OMG ITS 13 LINES I CAN DO STUFF NOW
+
+        FileReader reader2 = new FileReader("src/actorsList");
+        BufferedReader bufferedReader = new BufferedReader(reader2);
+        String actors = bufferedReader.readLine();
+        reader2.close();
+        bufferedReader.close();
+        String[] actorsArr = actors.split(",");
+       // System.out.println(actorsArr.length);
+
         Scanner scanner = new Scanner(System.in);
+
         while(true) {
             System.out.println("Enter an actor's name or (q) to quit");
             FileReader reader = new FileReader("src/KevinBaconDegreeMap");
@@ -32,6 +43,30 @@ public class KevinBaconRunner {
 
             String choice = scanner.nextLine();
             if (choice.equals("q")) break;
+
+            ArrayList<String> matches = new ArrayList<>();
+            for(String str:actorsArr)
+            {
+                if(str.toLowerCase().contains(choice.toLowerCase())) matches.add(str);
+            }
+
+            for (int i = 0; i < matches.size(); i++)
+            {
+                String name = matches.get(i);
+
+                // this will print index 0 as choice 1 in the results list; better for user!
+                int choiceNum = i + 1;
+
+                System.out.println("" + choiceNum + ". " + name);
+            }
+            System.out.println("Which actor do you want to pick");
+            System.out.println("Enter a number");
+
+            int num = scanner.nextInt();
+            scanner.nextLine();
+
+            choice = matches.get(num-1);
+
             while ((line = buffread.readLine()) != null) {
                 lineNum++;
                 alreadyRead.add(line);
@@ -49,6 +84,7 @@ public class KevinBaconRunner {
 
     public static String getPath(ArrayList<String> arr, String name,int lineNum)
     {
+        if(name.equals("Kevin Bacon")) return name;
         int reference = 0;
         ArrayList<String> print = new ArrayList<>();
         String display = "";
@@ -56,18 +92,12 @@ public class KevinBaconRunner {
         String[] actors = arr.get(arr.size()-1).split("/");
         for(String s:actors)
         {
-            if(s.contains(name))
+            String[] strArr = s.split(";");
+
+            if(s.contains(name)&&strArr[2].equals(name))
             {
-               if(lineNum%2==0)
-               {
-                   String subStr = s.substring(s.indexOf(";A")+2);
-                   reference = Integer.parseInt(subStr.substring(0,subStr.indexOf(";")));
-               }
-               else
-               {
-                   String subStr = s.substring(s.indexOf(";B")+2);
-                   reference = Integer.parseInt(subStr.substring(0,subStr.indexOf(";")));
-               }
+               reference = Integer.parseInt(strArr[1].substring(1));
+               break;
             }
         }
         int j = 1;

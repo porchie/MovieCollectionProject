@@ -9,7 +9,7 @@ public class BaconDegreeMaker {
     private ArrayList<SimpleMovie> movies;
     private Set<String> addedMovies = new HashSet<>();
     private Set<String> addedActors = new HashSet<>();
-    private FileWriter writer = new FileWriter("src/KevinBaconDegreeMap");
+   // private FileWriter writer = new FileWriter("src/KevinBaconDegreeMap");//dont uncomment this pls
 
 
     public BaconDegreeMaker(String fileName) throws IOException {
@@ -20,10 +20,33 @@ public class BaconDegreeMaker {
     {
         movies.forEach((n) -> System.out.println(n.getTitle() + " " + n.getCast()));
     }
+    /**public void actorsList()
+    {
+        try {
+            FileWriter writer2 = new FileWriter("src/actorsList");
+            Set<String> actors = new HashSet<>();
+            for (SimpleMovie m : movies) {
+                String[] cast = m.getCast().split(",");
+                for (String s : cast) actors.add(s);
+            }
+            ArrayList<String> result = new ArrayList<>();
+            result.addAll(actors);
+            MovieCollection.insertionSortWordList(result);
 
+            for(String str:result)
+            {
+                writer2.write(str + ",");
+            }
+            writer2.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+**/
 
-
-    public void writeMap() //dont call this lol it will kill your computer
+    /**public void writeMap() //dont call this lol it will kill your computer
     {
         try
         {
@@ -50,7 +73,7 @@ public class BaconDegreeMaker {
 
              EVEN LINE NUMS HAVE A - B
              ODD LINE NUMS HAVE B - A
-             **/
+
             for(int i = 0;i<5;i++) //mfw cook egg on my scorching laptop cuz jvm is crying
             {
                 String top = (i%2==0) ?"A":"B";
@@ -133,7 +156,7 @@ public class BaconDegreeMaker {
             System.out.println(e.getMessage());
             return new ArrayList<String>();
         }
-    }
+    }**/
 
     private void removeFromMovies(ArrayList<SimpleMovie> mov)
     {
