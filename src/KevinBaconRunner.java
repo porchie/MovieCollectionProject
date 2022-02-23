@@ -80,8 +80,13 @@ public class KevinBaconRunner {
                 }
                 if (line == null) System.out.println("NOT WITHIN 6 DEGREES OR SPELT WRONG");
                 else {
-                    System.out.println("Bacon Number of: " + lineNum / 2);
-                    System.out.println(getPath(alreadyRead, choice, lineNum));
+                    String display = getPath(alreadyRead, choice, lineNum);
+                    if(display.equals("NOGOOD")) System.out.println("Part of bad data set");
+                    else
+                    {
+                        System.out.println(display);
+                        System.out.println("Bacon Number of: " + lineNum / 2);
+                    }
                 }
             }
             reader.close();
@@ -116,7 +121,7 @@ public class KevinBaconRunner {
             int currentLine = lineNum-j;
             String[] castArr = arr.get(i).split("/");
             String[] actor = castArr[reference].split(";");
-
+            if(actor[2].equals("Somehow this piece of data got in here and messed up so much things")) return "NOGOOD";
             print.add(actor[2]);
             //System.out.println(castArr[reference]);
             reference = Integer.parseInt(actor[1].substring(1));
