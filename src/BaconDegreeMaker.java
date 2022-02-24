@@ -9,7 +9,7 @@ public class BaconDegreeMaker {
     private ArrayList<SimpleMovie> movies;
     private Set<String> addedMovies = new HashSet<>();
     private Set<String> addedActors = new HashSet<>();
-   // private FileWriter writer = new FileWriter("src/KevinBaconDegreeMap");//dont uncomment this
+    //private FileWriter writer = new FileWriter("src/KevinBaconDegreeMap");//dont uncomment this
 
 
     public BaconDegreeMaker(String fileName) throws IOException {
@@ -59,17 +59,6 @@ public class BaconDegreeMaker {
 
             ArrayList<SimpleMovie> arr1 = actorToMovie(literallyJustKevinBacon,"A","B");
             ArrayList<String> prevLayerAct =  movieToActor(arr1,"B","A");
-            /**
-             Every entry into the map has 2 points, one to the front and one to the back like this\
-             ;A1;The Thing;B1;
-             front refers to the parent on the map, aka where i got this entry from. A1 here refers to an actor in the thing
-             back is the reference that the entry's children will reference.
-             so basically
-             Jerry Seinfield;A1;
-             ;A1;The Thing;B1;
-             ;B1;Peter Falk
-
-             This way i can trace up the tree back to kevin bacon
 
 
 
@@ -100,7 +89,7 @@ public class BaconDegreeMaker {
             int j = 0;
             for (String s : actors) {
                 for (SimpleMovie m : movies) { //150000 everytime very bad
-                   if(m.getCast().contains(s)) {
+                   if(movieHasActor(s,m)) { //so basically a bunch of actors have their name written out as Name , Jr. and there is an actor named Jr. so All of the movies with Name, Jr. have Jr. in them cuz it splits by comma.
                         if(addedMovies.add(m.getTitle()))
                         {
                             added.add(m);
@@ -120,6 +109,16 @@ public class BaconDegreeMaker {
             System.out.println(e.getMessage());
             return new ArrayList<SimpleMovie>();
         }
+    }
+
+    private boolean movieHasActor(String actor, SimpleMovie mov)
+    {
+        String[] arr = mov.getCast().split(",");
+        for(String s:arr)
+        {
+            if(s.equals(actor)) return true;
+        }
+        return false;
     }
 
     private ArrayList<String> movieToActor(ArrayList<SimpleMovie> mov,String topPointer, String botPointer)

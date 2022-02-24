@@ -25,7 +25,7 @@ public class KevinBaconRunner {
 **/
 
 
-       FileReader reader2 = new FileReader("src/actorsList");
+      FileReader reader2 = new FileReader("src/actorsList");
         BufferedReader bufferedReader = new BufferedReader(reader2);
         String actors = bufferedReader.readLine();
         reader2.close();
