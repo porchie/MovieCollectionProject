@@ -9,7 +9,7 @@ public class BaconDegreeMaker {
     private ArrayList<SimpleMovie> movies;
     private Set<String> addedMovies = new HashSet<>();
     private Set<String> addedActors = new HashSet<>();
-   // private FileWriter writer = new FileWriter("src/KevinBaconDegreeMap");//dont uncomment this pls
+   // private FileWriter writer = new FileWriter("src/KevinBaconDegreeMap");//dont uncomment this
 
 
     public BaconDegreeMaker(String fileName) throws IOException {
@@ -45,8 +45,8 @@ public class BaconDegreeMaker {
         }
     }
 **/
-
-    /**public void writeMap() //dont call this lol it will kill your computer
+/**
+    public void writeMap() //dont call this lol it will kill your computer
     {
         try
         {
@@ -71,15 +71,14 @@ public class BaconDegreeMaker {
 
              This way i can trace up the tree back to kevin bacon
 
-             EVEN LINE NUMS HAVE A - B
-             ODD LINE NUMS HAVE B - A
+
 
             for(int i = 0;i<5;i++) //mfw cook egg on my scorching laptop cuz jvm is crying
             {
                 String top = (i%2==0) ?"A":"B";
                 String bot = (i%2==0) ?"B":"A";
                 arr1 = actorToMovie(prevLayerAct,top,bot);
-                prevLayerAct = movieToActor(arr1,top,bot);
+                prevLayerAct = movieToActor(arr1,bot,top);
             }
 
 
@@ -100,7 +99,6 @@ public class BaconDegreeMaker {
             int i = 0;
             int j = 0;
             for (String s : actors) {
-
                 for (SimpleMovie m : movies) { //150000 everytime very bad
                    if(m.getCast().contains(s)) {
                         if(addedMovies.add(m.getTitle()))
@@ -137,7 +135,11 @@ public class BaconDegreeMaker {
                 String[] cast = m.getCast().split(",");
                 for(String s:cast)
                 {
-                    if(addedActors.add(s))
+                    if(s.isEmpty())
+                    {
+
+                    }
+                    else if(addedActors.add(s))
                     {
                         actors.add(s);
                         writer.write(";"+topPointer+i+";"+s+";"+botPointer+j+";/");
@@ -156,8 +158,8 @@ public class BaconDegreeMaker {
             System.out.println(e.getMessage());
             return new ArrayList<String>();
         }
-    }**/
-
+    }
+**/
     private void removeFromMovies(ArrayList<SimpleMovie> mov)
     {
         for(SimpleMovie m: mov)

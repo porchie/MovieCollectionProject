@@ -9,8 +9,8 @@ import java.util.Scanner;
 public class KevinBaconRunner {
     public static void main(String[] args) throws IOException {
 
-       //BaconDegreeMaker b =new BaconDegreeMaker("src/movie_data.txt");
-       //DONOTUNCOMMENTTHISPLSIDONTWANTTOSUFFER****b.writeMap();
+      // BaconDegreeMaker b =new BaconDegreeMaker("src/movie_data.txt");
+      // b.writeMap();
 
         /**FileReader reader = new FileReader("src/KevinBaconDegreeMap");
         BufferedReader buffread = new BufferedReader(reader);
@@ -21,9 +21,11 @@ public class KevinBaconRunner {
             count++;
         }
         System.out.println(count);
-         **/ //OMG ITS 13 LINES I CAN DO STUFF NOW
+          //OMG ITS 13 LINES I CAN DO STUFF NOW
+**/
 
-        FileReader reader2 = new FileReader("src/actorsList");
+
+       FileReader reader2 = new FileReader("src/actorsList");
         BufferedReader bufferedReader = new BufferedReader(reader2);
         String actors = bufferedReader.readLine();
         reader2.close();
@@ -78,15 +80,13 @@ public class KevinBaconRunner {
                     alreadyRead.add(line);
                     if (line.contains(choice)) break;
                 }
+                System.out.println("Actor chosen: "+ choice);
                 if (line == null) System.out.println("NOT WITHIN 6 DEGREES OR SPELT WRONG");
                 else {
                     String display = getPath(alreadyRead, choice, lineNum);
-                    if(display.equals("NOGOOD")) System.out.println("Part of bad data set");
-                    else
-                    {
-                        System.out.println(display);
-                        System.out.println("Bacon Number of: " + lineNum / 2);
-                    }
+
+                    System.out.println(display);
+                    System.out.println("Bacon Number of: " + lineNum / 2);
                 }
             }
             reader.close();
@@ -121,8 +121,9 @@ public class KevinBaconRunner {
             int currentLine = lineNum-j;
             String[] castArr = arr.get(i).split("/");
             String[] actor = castArr[reference].split(";");
-            if(actor[2].equals("Somehow this piece of data got in here and messed up so much things")) return "NOGOOD";
+
             print.add(actor[2]);
+
             //System.out.println(castArr[reference]);
             reference = Integer.parseInt(actor[1].substring(1));
             j++;
