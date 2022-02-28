@@ -461,11 +461,12 @@ public class MovieCollection
     for (int j = 0; j < results.size(); j++)
     {
       String title = results.get(j).getTitle();
+      String rating = "" + results.get(j).getUserRating();
 
       // this will print index 0 as choice 1 in the results list; better for user!
       int choiceNum = j + 1;
 
-      System.out.println("" + choiceNum + ". " + title);
+      System.out.println("" + choiceNum + ". " + title + " rating: " + rating);
     }
 
     System.out.println("Which movie would you like to learn more about?");
