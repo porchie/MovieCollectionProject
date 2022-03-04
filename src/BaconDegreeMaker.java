@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.io.FileWriter;
+import java.util.regex.*
 
 
 public class BaconDegreeMaker {
@@ -221,4 +222,38 @@ public class BaconDegreeMaker {
             System.out.println(e.getMessage());
         }
     }
+    
+    /**
+    
+    private void importJSONMovieList(String fileName)
+    {
+        Pattern patt = Pattern.compile("\"([^\"]*)\"");
+        BufferedReader r = new BufferedReader(new FileReader(fileName);
+
+        String line;
+
+        while ((line = r.readLine()) != null) {
+
+            Matcher m = patt.matcher(line);
+            ArrayList<String> lineRead = new ArrayList<>();
+            while (m.find()) {
+                lineRead.add(m.group(0));
+            }
+            String title = lineRead.get(1);
+            for(int i = 2;i<lineRead.size();i++)
+            {
+                if(lineRead.get(i).contains("directors") // do the str that directors and stuffs
+                {
+                    
+                }
+            }
+        }
+        
+        
+         
+        
+        
+    }
+    
+    **/
 }
